@@ -11,47 +11,47 @@ namespace Ecommerce.Infra.Migrations
                 name: "Cliente",
                 columns: table => new
                 {
-                    IdCliente = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NomeDoCliente = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NomeCliente = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DataNascimento = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cliente", x => x.IdCliente);
+                    table.PrimaryKey("PK_Cliente", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Produto",
                 columns: table => new
                 {
-                    IdProduto = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NomedoProduto = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ValorUnitarioProduto = table.Column<double>(type: "float", nullable: false)
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ValorUnitario = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Produto", x => x.IdProduto);
+                    table.PrimaryKey("PK_Produto", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Pedido",
                 columns: table => new
                 {
-                    IdPedido = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ClienteIdCliente = table.Column<int>(type: "int", nullable: true)
+                    ClienteId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pedido", x => x.IdPedido);
+                    table.PrimaryKey("PK_Pedido", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pedido_Cliente_ClienteIdCliente",
-                        column: x => x.ClienteIdCliente,
+                        name: "FK_Pedido_Cliente_ClienteId",
+                        column: x => x.ClienteId,
                         principalTable: "Cliente",
-                        principalColumn: "IdCliente",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,41 +60,41 @@ namespace Ecommerce.Infra.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProdutoIdProduto = table.Column<int>(type: "int", nullable: true),
-                    Quantidade = table.Column<int>(type: "int", nullable: false),
-                    PedidoIdPedido = table.Column<int>(type: "int", nullable: true)
+                    ProdutoId = table.Column<int>(type: "int", nullable: false),
+                    PedidoId = table.Column<int>(type: "int", nullable: false),
+                    Quantidade = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ItemPedido", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ItemPedido_Pedido_PedidoIdPedido",
-                        column: x => x.PedidoIdPedido,
+                        name: "FK_ItemPedido_Pedido_PedidoId",
+                        column: x => x.PedidoId,
                         principalTable: "Pedido",
-                        principalColumn: "IdPedido",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ItemPedido_Produto_ProdutoIdProduto",
-                        column: x => x.ProdutoIdProduto,
+                        name: "FK_ItemPedido_Produto_ProdutoId",
+                        column: x => x.ProdutoId,
                         principalTable: "Produto",
-                        principalColumn: "IdProduto",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItemPedido_PedidoIdPedido",
+                name: "IX_ItemPedido_PedidoId",
                 table: "ItemPedido",
-                column: "PedidoIdPedido");
+                column: "PedidoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItemPedido_ProdutoIdProduto",
+                name: "IX_ItemPedido_ProdutoId",
                 table: "ItemPedido",
-                column: "ProdutoIdProduto");
+                column: "ProdutoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pedido_ClienteIdCliente",
+                name: "IX_Pedido_ClienteId",
                 table: "Pedido",
-                column: "ClienteIdCliente");
+                column: "ClienteId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

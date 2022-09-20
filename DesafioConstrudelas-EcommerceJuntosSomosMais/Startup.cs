@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace DesafioConstrudelas_EcommerceJuntosSomosMais
 {
@@ -29,13 +31,19 @@ namespace DesafioConstrudelas_EcommerceJuntosSomosMais
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
             services.AddTransient<IProdutoUseCase, ProdutoUseCase>();
             services.AddTransient<IPedidoRepository, PedidoRepository>();
-            services.AddTransient<IPedidoUseCase, PedidoUseCase>();
+            services.AddTransient<IPedidoUseCase, PedidoUseCase>();                        
 
             services.AddDbContext<ApplicationContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
-            services.AddControllers();
+
+            //Previnir erro de dependencia ciclica
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DesafioConstrudelas_EcommerceJuntosSomosMais", Version = "v1" });

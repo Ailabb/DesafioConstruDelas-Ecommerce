@@ -2,7 +2,7 @@
 
 namespace Ecommerce.Infra.Migrations
 {
-    public partial class teste : Migration
+    public partial class AlteradoEntitys : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

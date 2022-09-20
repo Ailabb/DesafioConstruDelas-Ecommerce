@@ -25,7 +25,7 @@ namespace Ecommerce.Infra.Repositories
         {
             //procurar o meu cliente e retornar caso  o encontre
             //para filtrar usei o Linq
-            return await _context.Cliente.FirstOrDefaultAsync(cliente => cliente.IdCliente == id);
+            return await _context.Cliente.FirstOrDefaultAsync(cliente => cliente.Id == id);
         }
 
         public Task CadastrarCliente(Cliente cliente)
