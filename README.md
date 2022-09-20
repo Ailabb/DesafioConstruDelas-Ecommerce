@@ -3,22 +3,22 @@ Desafio Final do ConstruDelas
 
 Lista de Endpoints
 
-# Clientes:
+## Clientes:
 
-Get();
-GetPorId();
-Insert(Cliente cliente);
+1. Get();
+2. GetPorId();
+3. Insert(Cliente cliente);
 
-# Produtos:
+## Produtos:
 
-Get();
-GetPorId();
-Insert(Produto produto);
+1. Get();
+2. GetPorId();
+3. Insert(Produto produto);
 
 
-# Pedidos:
+## Pedidos:
 
-Get();
-GetPorId();
-GetPedidoPorClienteId(int clienteId);
-Post(Pedido pedido);
+1. Get();
+2. GetPorId();
+3. GetPedidoPorClienteId(int clienteId);
+4. Post(Pedido pedido);
