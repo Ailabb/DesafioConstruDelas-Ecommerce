@@ -9,6 +9,6 @@ namespace Ecommerce.Core.Entities
         public int Id { get; set; }
         public int ClienteId { get; set; }
         public Cliente Cliente { get; set; }
-        public List<ItemPedido> Items { get; set; }
+        public List<ItemPedido> Itens { get; set; }
     }
 }

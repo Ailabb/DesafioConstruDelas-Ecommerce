@@ -42,7 +42,7 @@ namespace DesafioConstrudelas_EcommerceJuntosSomosMais.Controllers
                 {
                     Id = pedido.Id,
                     NomeCliente = pedido.Cliente.NomeCliente,
-                    Itens = pedido.Items.Select(itemPedido => new ItemPedidoResponse
+                    Itens = pedido.Itens.Select(itemPedido => new ItemPedidoResponse
                     {
                         IdProduto = itemPedido.Produto.Id,
                         NomeProduto = itemPedido.Produto.Nome,
@@ -69,7 +69,7 @@ namespace DesafioConstrudelas_EcommerceJuntosSomosMais.Controllers
             {
                 Id = pedido.Id,
                 NomeCliente = pedido.Cliente.NomeCliente,
-                Itens = pedido.Items.Select(itemPedido => new ItemPedidoResponse
+                Itens = pedido.Itens.Select(itemPedido => new ItemPedidoResponse
                 {
                     IdProduto = itemPedido.Produto.Id,
                     NomeProduto = itemPedido.Produto.Nome,
@@ -97,7 +97,7 @@ namespace DesafioConstrudelas_EcommerceJuntosSomosMais.Controllers
             {
                 Id = pedido.Id,
                 NomeCliente = pedido.Cliente.NomeCliente,
-                Itens = pedido.Items.Select(itemPedido => new ItemPedidoResponse
+                Itens = pedido.Itens.Select(itemPedido => new ItemPedidoResponse
                 {
                     IdProduto = itemPedido.Produto.Id,
                     NomeProduto = itemPedido.Produto.Nome,
@@ -127,7 +127,7 @@ namespace DesafioConstrudelas_EcommerceJuntosSomosMais.Controllers
             var pedido = new Pedido
             {
                 ClienteId = request.IdCliente,
-                Items = request.Itens.Select(itemPedido => new ItemPedido()
+                Itens = request.Itens.Select(itemPedido => new ItemPedido()
                 {
                     ProdutoId = itemPedido.IdProduto,
                     Quantidade = itemPedido.Quantidade,

@@ -22,7 +22,7 @@ namespace Ecommerce.Infra.Repositories
             return await _context.Pedido
                 .AsNoTracking()
                 .Include(x => x.Cliente)
-                .Include(x => x.Items)
+                .Include(x => x.Itens)
                     .ThenInclude(x => x.Produto)
                 .ToListAsync();
         }
@@ -33,7 +33,7 @@ namespace Ecommerce.Infra.Repositories
                 .AsNoTracking()
                 .Where(pedido => pedido.Id == id)
                 .Include(x => x.Cliente)
-                .Include(x => x.Items)                
+                .Include(x => x.Itens)                
                     .ThenInclude(x => x.Produto)
                 .FirstOrDefaultAsync();
         }
@@ -44,7 +44,7 @@ namespace Ecommerce.Infra.Repositories
                 .AsNoTracking()
                 .Where(pedido => pedido.ClienteId == clienteId)
                 .Include(x => x.Cliente)
-                .Include(x => x.Items)
+                .Include(x => x.Itens)
                     .ThenInclude(x => x.Produto)
                 .FirstOrDefaultAsync();
         }

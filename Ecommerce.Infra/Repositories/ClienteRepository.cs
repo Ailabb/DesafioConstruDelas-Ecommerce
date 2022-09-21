@@ -18,14 +18,18 @@ namespace Ecommerce.Infra.Repositories
         //Ligação com banco
         public async Task<List<Cliente>> ListagemDeClientes()
         {
-            return await _context.Cliente.ToListAsync();
+            return await _context.Cliente
+                .Include(x => x.Contato)
+                .ToListAsync();
         }
 
         public async Task<Cliente> BuscaPorId(int id)
         {
             //procurar o meu cliente e retornar caso  o encontre
             //para filtrar usei o Linq
-            return await _context.Cliente.FirstOrDefaultAsync(cliente => cliente.Id == id);
+            return await _context.Cliente
+                .Include(x => x.Contato)
+                .FirstOrDefaultAsync(cliente => cliente.Id == id);
         }
 
         public Task CadastrarCliente(Cliente cliente)

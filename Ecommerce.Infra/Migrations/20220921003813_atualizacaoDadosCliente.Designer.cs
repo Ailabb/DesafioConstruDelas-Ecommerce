@@ -4,14 +4,16 @@ using Ecommerce.Infra.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Ecommerce.Infra.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20220921003813_atualizacaoDadosCliente")]
+    partial class atualizacaoDadosCliente
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,20 +124,6 @@ namespace Ecommerce.Infra.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Produto");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Nome = "Caneta",
-                            ValorUnitario = 1.5
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Nome = "Borracha",
-                            ValorUnitario = 2.0
-                        });
                 });
 
             modelBuilder.Entity("Ecommerce.Core.Entities.DadosContatoCliente", b =>

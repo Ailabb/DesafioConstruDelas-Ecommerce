@@ -8,9 +8,7 @@ namespace Ecommerce.Application.Models
 {
     public class ProdutoResponse
     {
-        public int IdProduto { get; set; }
-        public string NomedoProduto { get; set; }
-        public int QuantdProduto { get; set; }
+        public string NomeProduto { get; set; }
         public double ValorDoProduto { get; set; }
     }
 }
