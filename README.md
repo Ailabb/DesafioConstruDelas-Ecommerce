@@ -18,7 +18,7 @@ Lista de Endpoints
 
 ## Pedidos:
 
-1. Get();
-2. GetPorId();
-3. GetPedidoPorClienteId(int clienteId);
-4. Post(Pedido pedido);
+1. [Get] api/pedido/
+2. [Get] api/pedido/{id}
+3. [Get] api/pedido/cliente/{clienteId}
+4. [Post] api/pedido/
