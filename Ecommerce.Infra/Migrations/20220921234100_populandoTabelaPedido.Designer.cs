@@ -4,14 +4,16 @@ using Ecommerce.Infra.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Ecommerce.Infra.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20220921234100_populandoTabelaPedido")]
+    partial class populandoTabelaPedido
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,42 +44,6 @@ namespace Ecommerce.Infra.Migrations
                             Id = 1,
                             DataNascimento = new DateTime(1990, 1, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NomeCliente = "Fernanda Santos"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DataNascimento = new DateTime(1990, 1, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NomeCliente = "Maria Ferreira"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DataNascimento = new DateTime(1988, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NomeCliente = "Bianca Torres"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DataNascimento = new DateTime(1994, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NomeCliente = "Amanda Gusmao"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DataNascimento = new DateTime(1996, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NomeCliente = "Fernando Sampaio"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            DataNascimento = new DateTime(1989, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NomeCliente = "Bruno Gomes"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            DataNascimento = new DateTime(1987, 2, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NomeCliente = "Paula Motta"
                         });
                 });
 
@@ -102,21 +68,6 @@ namespace Ecommerce.Infra.Migrations
                         {
                             Id = 1,
                             ClienteId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ClienteId = 3
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ClienteId = 2
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ClienteId = 6
                         });
                 });
 
@@ -217,54 +168,6 @@ namespace Ecommerce.Infra.Migrations
                                     ClienteId = 1,
                                     Email = "fernandaS@gmail.com",
                                     TelefoneResidencial = "71-33558877"
-                                },
-                                new
-                                {
-                                    Id = 2,
-                                    Celular = "71-987875224",
-                                    ClienteId = 2,
-                                    Email = "marifer@gmail.com",
-                                    TelefoneResidencial = "71-33557845"
-                                },
-                                new
-                                {
-                                    Id = 3,
-                                    Celular = "71-976248688",
-                                    ClienteId = 3,
-                                    Email = "biancatorres@gmail.com",
-                                    TelefoneResidencial = "71-32365877"
-                                },
-                                new
-                                {
-                                    Id = 4,
-                                    Celular = "71-924598224",
-                                    ClienteId = 4,
-                                    Email = "mandagus@gmail.com",
-                                    TelefoneResidencial = "71-37894645"
-                                },
-                                new
-                                {
-                                    Id = 5,
-                                    Celular = "71-987878459",
-                                    ClienteId = 5,
-                                    Email = "fernandospr@gmail.com",
-                                    TelefoneResidencial = "71-36877845"
-                                },
-                                new
-                                {
-                                    Id = 6,
-                                    Celular = "71-987458688",
-                                    ClienteId = 6,
-                                    Email = "brunno.gomes@gmail.com",
-                                    TelefoneResidencial = "71-33655877"
-                                },
-                                new
-                                {
-                                    Id = 7,
-                                    Celular = "71-975648224",
-                                    ClienteId = 7,
-                                    Email = "paula_motta@gmail.com",
-                                    TelefoneResidencial = "71-33584645"
                                 });
                         });
 
@@ -328,50 +231,8 @@ namespace Ecommerce.Infra.Migrations
                                 {
                                     Id = 2,
                                     PedidoId = 1,
-                                    ProdutoId = 4,
-                                    Quantidade = 5
-                                },
-                                new
-                                {
-                                    Id = 3,
-                                    PedidoId = 2,
-                                    ProdutoId = 4,
-                                    Quantidade = 2
-                                },
-                                new
-                                {
-                                    Id = 4,
-                                    PedidoId = 2,
-                                    ProdutoId = 5,
-                                    Quantidade = 3
-                                },
-                                new
-                                {
-                                    Id = 5,
-                                    PedidoId = 3,
-                                    ProdutoId = 2,
-                                    Quantidade = 5
-                                },
-                                new
-                                {
-                                    Id = 6,
-                                    PedidoId = 4,
-                                    ProdutoId = 4,
-                                    Quantidade = 1
-                                },
-                                new
-                                {
-                                    Id = 7,
-                                    PedidoId = 4,
                                     ProdutoId = 1,
-                                    Quantidade = 2
-                                },
-                                new
-                                {
-                                    Id = 8,
-                                    PedidoId = 4,
-                                    ProdutoId = 5,
-                                    Quantidade = 3
+                                    Quantidade = 5
                                 });
                         });
 

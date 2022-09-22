@@ -9,6 +9,6 @@ namespace Ecommerce.Application.Models
     public class ProdutoResponse
     {
         public string NomeProduto { get; set; }
-        public double ValorDoProduto { get; set; }
+        public double ValorDoProduto { get; set; }        
     }
 }
