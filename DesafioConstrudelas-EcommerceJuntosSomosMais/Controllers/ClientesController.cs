@@ -10,9 +10,7 @@ namespace DesafioConstrudelas_EcommerceJuntosSomosMais.Controllers
 {
     [ApiController]
     [Route("api/clientes")]
-    //get para todos os usuarios
-    //get para usuarios atraves do nome
-    //get para usuarios atraves do id
+   
 
     public class ClientesController : ControllerBase
     {
@@ -49,7 +47,7 @@ namespace DesafioConstrudelas_EcommerceJuntosSomosMais.Controllers
             return Ok(response);
         }
 
-        [HttpPost("Cadastrar_Cliente")]
+        [HttpPost]
         public async Task<ActionResult> Insert(ClienteRequest request)
         {
             //Seria interessante saber se esse cliente já foi cadastrado
@@ -68,16 +66,6 @@ namespace DesafioConstrudelas_EcommerceJuntosSomosMais.Controllers
             await _clienteUse.CadastrarCliente(cliente);
             return NoContent();//sem devolução
         }
-
-        //[HttpGet("Busca_por_nome")]
-        //public async Task<ActionResult<ClienteResponse>> ConsultaClienteNome(string nomeDoCliente)
-        //{
-        //    var cliente = clientes.FirstOrDefault(nome => nome.NomeDoCliente == nomeDoCliente);
-        //    if (cliente == null)
-        //        return NotFound("Cliente não encontrado");
-
-        //    return Ok(cliente);
-        //}
-
+                
     }
 }

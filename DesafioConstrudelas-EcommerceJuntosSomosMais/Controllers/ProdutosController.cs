@@ -22,7 +22,7 @@ namespace DesafioConstrudelas_EcommerceJuntosSomosMais.Controllers
         }
 
         [HttpGet]
-        //Endpoint para Listagem de todos os clientes
+        //Endpoint para Listagem de todos os produtos
         public async Task<ActionResult<List<ProdutoResponse>>> Get()
         {
             var produtos = await _produtoUseCase.ListagemDeProdutos();
@@ -58,7 +58,7 @@ namespace DesafioConstrudelas_EcommerceJuntosSomosMais.Controllers
             return Ok(response);
         }
 
-        [HttpPost("Cadastrar_Produto")]
+        [HttpPost]
         public async Task<ActionResult> Insert(ProdutoRequest request)
         {
             if (request.ValorDoProduto <= 0)
