@@ -1,19 +1,21 @@
 # DesafioConstruDelas-Ecommerce
-Desafio Final do ConstruDelas 
+##Desafio Final do ConstruDelas: 
+###Objetivo: Construir uma API para gerenciar os pedidos de uma E-commmerce.
 
 Lista de Endpoints
 
 ## Clientes:
 
-1. Get();
-2. GetPorId();
-3. Insert(Cliente cliente);
+1. [Get] api/cliente/
+2. [Get] api/cliente/{id}
+3. [Post] api/cliente/
+
 
 ## Produtos:
 
-1. Get();
-2. GetPorId();
-3. Insert(Produto produto);
+1. [Get] api/produto/
+2. [Get] api/produto/{id}
+3. [Post] api/produto/
 
 
 ## Pedidos:
