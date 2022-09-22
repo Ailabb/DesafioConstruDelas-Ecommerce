@@ -24,7 +24,7 @@ namespace Ecommerce.Infra.Repositories
         public async Task<Produto> BuscaPorId(int id)
         {
             //para filtrar usei o Linq
-            return await _context.Produto.FirstOrDefaultAsync(produto => produto.IdProduto == id);
+            return await _context.Produto.FirstOrDefaultAsync(produto => produto.Id == id);
         }
 
         public Task CadastrarProduto(Produto produto)

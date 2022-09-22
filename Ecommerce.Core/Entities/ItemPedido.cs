@@ -11,9 +11,12 @@ namespace Ecommerce.Core.Entities
     {
 
         //1 ItemPedido representa 1 linha em uma nota
-        [Key]
+        [Key]//Indicando que o ID é uma chave primaria 
         public int Id { get; set; }
+        public int ProdutoId { get; set; }
         public Produto Produto  { get; set; }
+        public int PedidoId { get; set; }
+        public Pedido Pedido { get; set; }
         public int Quantidade { get; set; }
     }
 }

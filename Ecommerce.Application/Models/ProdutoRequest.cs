@@ -8,5 +8,8 @@ namespace Ecommerce.Application.Models
 {
     public class ProdutoRequest
     {
+        public string NomeProduto { get; set; }
+
+        public double ValorDoProduto { get; set; }
     }
 }

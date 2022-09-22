@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce.Infra.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220916014527_Inicial")]
-    partial class Inicial
+    [Migration("20220921011113_populandoTabelaProduto")]
+    partial class populandoTabelaProduto
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace Ecommerce.Infra.Migrations
 
             modelBuilder.Entity("Ecommerce.Core.Entities.Cliente", b =>
                 {
-                    b.Property<int>("IdCliente")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -31,12 +31,39 @@ namespace Ecommerce.Infra.Migrations
                     b.Property<DateTime>("DataNascimento")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("NomeDoCliente")
+                    b.Property<string>("NomeCliente")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdCliente");
+                    b.HasKey("Id");
 
                     b.ToTable("Cliente");
+                });
+
+            modelBuilder.Entity("Ecommerce.Core.Entities.DadosContatoCliente", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Celular")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TelefoneResidencial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClienteId")
+                        .IsUnique();
+
+                    b.ToTable("DadosContatoCliente");
                 });
 
             modelBuilder.Entity("Ecommerce.Core.Entities.ItemPedido", b =>
@@ -46,10 +73,10 @@ namespace Ecommerce.Infra.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("PedidoIdPedido")
+                    b.Property<int>("PedidoId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProdutoIdProduto")
+                    b.Property<int>("ProdutoId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantidade")
@@ -57,57 +84,88 @@ namespace Ecommerce.Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PedidoIdPedido");
+                    b.HasIndex("PedidoId");
 
-                    b.HasIndex("ProdutoIdProduto");
+                    b.HasIndex("ProdutoId");
 
                     b.ToTable("ItemPedido");
                 });
 
             modelBuilder.Entity("Ecommerce.Core.Entities.Pedido", b =>
                 {
-                    b.Property<int>("IdPedido")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClienteIdCliente")
+                    b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
-                    b.HasKey("IdPedido");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ClienteIdCliente");
+                    b.HasIndex("ClienteId");
 
                     b.ToTable("Pedido");
                 });
 
             modelBuilder.Entity("Ecommerce.Core.Entities.Produto", b =>
                 {
-                    b.Property<int>("IdProduto")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("NomedoProduto")
+                    b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("ValorUnitarioProduto")
+                    b.Property<double>("ValorUnitario")
                         .HasColumnType("float");
 
-                    b.HasKey("IdProduto");
+                    b.HasKey("Id");
 
                     b.ToTable("Produto");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Nome = "Caneta",
+                            ValorUnitario = 1.5
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nome = "Borracha",
+                            ValorUnitario = 2.0
+                        });
+                });
+
+            modelBuilder.Entity("Ecommerce.Core.Entities.DadosContatoCliente", b =>
+                {
+                    b.HasOne("Ecommerce.Core.Entities.Cliente", "Cliente")
+                        .WithOne("Contato")
+                        .HasForeignKey("Ecommerce.Core.Entities.DadosContatoCliente", "ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
                 });
 
             modelBuilder.Entity("Ecommerce.Core.Entities.ItemPedido", b =>
                 {
-                    b.HasOne("Ecommerce.Core.Entities.Pedido", null)
+                    b.HasOne("Ecommerce.Core.Entities.Pedido", "Pedido")
                         .WithMany("Itens")
-                        .HasForeignKey("PedidoIdPedido");
+                        .HasForeignKey("PedidoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Ecommerce.Core.Entities.Produto", "Produto")
                         .WithMany()
-                        .HasForeignKey("ProdutoIdProduto");
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pedido");
 
                     b.Navigation("Produto");
                 });
@@ -116,9 +174,16 @@ namespace Ecommerce.Infra.Migrations
                 {
                     b.HasOne("Ecommerce.Core.Entities.Cliente", "Cliente")
                         .WithMany()
-                        .HasForeignKey("ClienteIdCliente");
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Cliente");
+                });
+
+            modelBuilder.Entity("Ecommerce.Core.Entities.Cliente", b =>
+                {
+                    b.Navigation("Contato");
                 });
 
             modelBuilder.Entity("Ecommerce.Core.Entities.Pedido", b =>

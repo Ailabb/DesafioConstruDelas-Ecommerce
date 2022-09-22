@@ -23,6 +23,11 @@ namespace Ecommerce.Application.UseCases
             return await _pedidoRepository.BuscaPorId(id);
         }
 
+        public async Task<Pedido> BuscaPorClienteId(int clienteId)
+        {
+            return await _pedidoRepository.BuscaPorClienteId(clienteId);
+        }
+
         public Task CadastrarPedido(Pedido pedido)
         {
             return _pedidoRepository.CadastrarPedido(pedido);

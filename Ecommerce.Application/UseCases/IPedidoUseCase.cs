@@ -8,6 +8,7 @@ namespace Ecommerce.Application.UseCases
     {
         public Task<List<Pedido>> ListagemDePedidos();
         public Task<Pedido> BuscaPorId(int id);
+        public Task<Pedido> BuscaPorClienteId(int clienteId);
         public Task CadastrarPedido(Pedido pedido);
     }
 }

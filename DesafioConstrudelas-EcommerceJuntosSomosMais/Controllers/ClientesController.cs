@@ -1,4 +1,5 @@
-﻿using Ecommerce.Application.UseCases;
+﻿using Ecommerce.Application.Models;
+using Ecommerce.Application.UseCases;
 using Ecommerce.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -27,7 +28,7 @@ namespace DesafioConstrudelas_EcommerceJuntosSomosMais.Controllers
 
         [HttpGet]
         //Endpoint para Listagem de todos os clientes
-        public async Task<ActionResult<List<Cliente>>> Get()
+        public async Task<ActionResult<List<ClienteResponse>>> Get()
         {
             var response = await _clienteUse.ListagemDeClientes();
             if (response == null)
@@ -38,7 +39,7 @@ namespace DesafioConstrudelas_EcommerceJuntosSomosMais.Controllers
         [HttpGet("{id}")]
         //Endpoint api/clientes/id
         //Endpoint para Buscar Cliente por Id
-        public async Task<ActionResult<Cliente>> GetPorId(int id)
+        public async Task<ActionResult<ClienteResponse>> GetPorId(int id)
         {
             var response = await _clienteUse.BuscaPorId(id);
 
@@ -49,10 +50,23 @@ namespace DesafioConstrudelas_EcommerceJuntosSomosMais.Controllers
         }
 
         [HttpPost("Cadastrar_Cliente")]
-        public async Task<ActionResult> Insert(Cliente cliente)
+        public async Task<ActionResult> Insert(ClienteRequest request)
         {
+            //Seria interessante saber se esse cliente já foi cadastrado
+            var cliente = new Cliente
+            {
+                NomeCliente = request.NomeCliente,
+                DataNascimento = request.DataNascimento,
+                Contato = new DadosContatoCliente
+                {
+                    Celular = request.Contato.Celular,
+                    TelefoneResidencial = request.Contato.TelefoneResidencial,
+                    Email = request.Contato.Email,
+                }
+            };
+
             await _clienteUse.CadastrarCliente(cliente);
-            return NoContent();
+            return NoContent();//sem devolução
         }
 
         //[HttpGet("Busca_por_nome")]

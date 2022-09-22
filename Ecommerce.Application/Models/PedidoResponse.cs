@@ -8,9 +8,17 @@ namespace Ecommerce.Application.Models
 {
     public class PedidoResponse
     {
-        public int IdPedido { get; set; }
-        public int QuantdItens { get; set; }
-        public ClienteResponse Cliente { get; set; }
-        public List<ProdutoResponse> Produtos { get; set; }
+        public int Id { get; set; }
+        public string NomeCliente { get; set; }
+        public List<ItemPedidoResponse> Itens { get; set; }
+    }
+
+    public class ItemPedidoResponse
+    {
+        public int IdProduto { get; set; }
+        public string NomeProduto { get; set; }
+        public int Quantidade { get; set; }
+        public double ValorUnitario { get; set; }
+        public double ValorTotal { get; set; }
     }
 }
